@@ -14,13 +14,13 @@ function handleError(err) {
   console.error(err);
 }
 
-function publishSegmentEvent(videoId, segmentIdx, segmentUri, fps, frames, fn) {
+function publishSegmentEvent(videoId, segmentIdx, segmentUri, fps, framesPerSegment, fn) {
   var data = {
     videoId: videoId,
     uri: segmentUri,
     segmentIdx: segmentIdx,
     fps: fps,
-    frames: frames
+    framesPerSegment: framesPerSegment
   };
 
   bus.publishVideoSegmentCreated(data, fn);
@@ -34,7 +34,7 @@ bus.on('video', function (msg) {
   var segmenter = new Segmenter()
     .on('segment', function (segment) {
       // generate frame event
-      publishSegmentEvent(video.id, segment.idx, segment.uri, segment.fps, segment.frames, function (err) {
+      publishSegmentEvent(video.id, segment.idx, segment.uri, segment.fps, segment.framesPerSegment, function (err) {
         if (err) handleError(err);
       });
     })
