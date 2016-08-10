@@ -16,8 +16,8 @@ function handleError(err) {
 
 function publishSegmentEvent(videoId, segmentIdx, segmentUri, fps, frames, fn) {
   var data = {
-    uri: segmentUri,
     videoId: videoId,
+    uri: segmentUri,
     segmentIdx: segmentIdx,
     fps: fps,
     frames: frames
